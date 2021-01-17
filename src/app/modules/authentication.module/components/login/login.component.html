@@ -1,0 +1,37 @@
+<div [ngClass]="['login-body']">
+    <div [ngClass]="['login-section']">
+        <img src="../../../../../assets/logo.JPG" [ngStyle]="{'width': '100%' , 'height': 'inherit'}">
+    </div>
+    
+    <div [ngClass]="['login-section' , 'login-form']">
+        <form [formGroup]="loginInfo" (ngSubmit)="onSubmit()">
+            <div>
+                <mat-form-field class="example-form-field" [ngStyle]="{'width':'20rem'}" appearance="outline">
+                    <mat-label [ngClass]="['form-label']">اسم المستخدم</mat-label>
+                    <input matInput type="text" [ngStyle]="{'text-align': 'end', 'font-size': '24px'}" name="userName"
+                    formControlName="userName">
+                </mat-form-field>
+                <div *ngIf="!userName.valid && (userName.dirty ||userName.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل اسم المستخدم*
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngStyle]="{'width':'20rem'}" appearance="outline">
+                    <mat-label [ngClass]="['form-label']">كلمة السر</mat-label>
+                    <input matInput type="text" [ngStyle]="{'text-align': 'end', 'font-size': '24px'}" name="password"
+                        type="password" formControlName="password">
+                </mat-form-field>
+                <div *ngIf="!password.valid && (password.dirty ||password.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل كلمة السر *
+                </div>
+            </div>
+
+            <div *ngIf="failedLogin" [ngClass]="['err-msg']">
+                يرجى التأكد من اسم المستخدم و كلمة السر*
+            </div>
+            <br />
+            <button mat-raised-button color="primary" type="submit" [ngClass]="['form-btn-save']">دخول</button>
+        </form>
+    </div>
+</div>

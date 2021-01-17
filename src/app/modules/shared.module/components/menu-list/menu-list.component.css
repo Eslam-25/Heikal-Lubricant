@@ -1,0 +1,11 @@
+.menu-item{
+    text-align: end;
+    font-size: large;
+}
+
+.menu-arrow-left{
+    transform: translateY(30%);
+}
+.mat-menu-item-submenu-trigger::after{
+    display: none;
+}

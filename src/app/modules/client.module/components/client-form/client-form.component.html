@@ -1,0 +1,82 @@
+<div [ngClass]="['client-form-body']">
+    <div>
+        <span [ngClass]="['card-text']">
+            إضافة عميل جديد
+        </span>
+    </div>
+
+    <br />
+
+    <div>
+        <form [formGroup]="clientFormInfo" (ngSubmit)="onSubmit()">
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> اسم العميل</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="clientName"
+                        formControlName="clientName">
+                </mat-form-field>
+                <div *ngIf="!clientName.valid && (clientName.dirty ||clientName.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل اسم العميل *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> رقم الهاتف</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="phoneNumber"
+                        formControlName="phoneNumber">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+                <div *ngIf="!phoneNumber.valid && (phoneNumber.dirty ||phoneNumber.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل رقم الهاتف *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> العنوان </mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="address" formControlName="address">
+                    <mat-icon matSuffix>home</mat-icon>
+                </mat-form-field>
+                <div *ngIf="!address.valid && (address.dirty ||address.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل العنوان *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> اليوم </mat-label>
+                    <mat-select [ngClass]="['form-label-select']" name="dayName" formControlName="dayName">
+                        <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day">
+                            {{day}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                <div *ngIf="!dayName.valid && (dayName.dirty ||dayName.touched)" [ngClass]="['err-msg']">
+                    من فضلك اختار اليوم *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> المنطقة </mat-label>
+                    <mat-select [ngClass]="['form-label-select']" name="lineName" formControlName="lineName">
+                        <mat-option *ngFor="let line of linesOfDay" [ngClass]="['form-label-select']" [value]="line">
+                            {{line}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                <div *ngIf="!lineName.valid && (lineName.dirty ||lineName.touched)" [ngClass]="['err-msg']">
+                    <span *ngIf="linesOfDay?.length > 0">من فضلك اختار المنطقة *</span>
+                </div>
+            </div>
+
+            <div>
+                <button mat-raised-button color="primary" type="submit" [ngClass]="['form-btn-save']">حفظ</button>
+            </div>
+
+        </form>
+    </div>
+</div>

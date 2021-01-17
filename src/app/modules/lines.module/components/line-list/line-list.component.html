@@ -1,0 +1,25 @@
+<div [ngClass]="['card-line-list']">
+    <div>
+        <span [ngClass]="['card-text']">
+            الخطوط بالأيام
+        </span>
+    </div>
+    <br />
+
+    <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let day of linesOfDays">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    عدد المناطق : {{day?.lines.length}}
+                </mat-panel-title>
+                <mat-panel-title [ngStyle]="{'justify-content': 'flex-end', 'font-size': '20px'}">
+                    {{day.dayName}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-card-list-lines [linesDay]="day"></app-card-list-lines>
+            
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>

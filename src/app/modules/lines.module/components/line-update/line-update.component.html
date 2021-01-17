@@ -1,0 +1,62 @@
+<div [ngClass]="['card-form']">
+    <div>
+        <span [ngClass]="['card-text']">
+            تعديل خط يوم {{lineDay}}
+        </span>
+    </div>
+
+    <br />
+    <br />
+
+    <div *ngIf="linesOfDay.length > 0; else elseBlock">
+        <table mat-table [ngStyle]="{'width': '90%' , 'margin': '0 auto'}" [dataSource]="linesOfDay"
+            class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المسلسل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lineName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اسم الخط </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.lineName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isActive">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> حالة الخط </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <div *ngIf="element.isActive">نشط</div>
+                    <div *ngIf="!element.isActive">غير نشط</div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تعديل </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#00005C'"
+                        (click)="openUpdateDialog(element)">edit</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> حذف </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#990A0D'"
+                        (click)="openDeleteDialog(element)">delete</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div [ngStyle]="{'text-align': 'left', 'margin-left': '5%', 'margin-top': '1rem'}">
+            <a [routerLink]="['../../../lines/list']">العودة الى الوراء</a>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <h3 [style.color]="'#A00807'">لا يوجد خطوط فى هذا اليوم</h3>
+        <a [routerLink]="['../../../lines/list']">العودة الى الوراء</a>
+    </ng-template>
+
+
+</div>

@@ -1,0 +1,78 @@
+<div [ngClass]="['clients-body']">
+    <div>
+        <span [ngClass]="['card-text']">
+            المنتجات
+        </span>
+    </div>
+
+    <br />
+    
+    <div>
+        <table mat-table [ngStyle]="{'width': '90%' , 'margin': '0 auto'}" [dataSource]="products"
+            class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المسلسل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="productName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اسم المنتج </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.productName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="liter">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> Liter </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.liter}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="km">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> KM </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.km}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="api">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> API </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.api}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sae">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> SAE </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.sae}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sellingPrice">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> سعر البيع </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.sellingPrice}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تعديل </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" matTooltip="تعديل المنتج" [ngClass]="['table-btn']" [style.color]="'#00005C'"
+                        [routerLink]="['/products/product']" [queryParams]="{productId: element.id}">edit</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> حذف </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" matTooltip="حذف المنتج" [ngClass]="['table-btn']" [style.color]="'#990A0D'"
+                        (click)="openDeleteDialog(element)">delete</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="detail">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تفاصيل </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" matTooltip="عرض التفاصيل" [ngClass]="['table-btn']" [style.color]="'#990A0D'"
+                        [routerLink]="['../product-detail' , element.id]">details</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

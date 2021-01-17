@@ -1,0 +1,12 @@
+.home-body{
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.card-text{
+    font-size: 3rem;
+}

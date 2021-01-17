@@ -1,0 +1,16 @@
+<div *ngIf="linesDay?.lines?.length > 0; else elseBlock">
+    <div [ngStyle]="{'display': 'inline', 'font-size': '1.5rem'}" *ngFor="let line of linesDay?.lines; let last=last;">
+        <span> {{line.lineName}} </span>
+        <span class="material-icons" [ngStyle]="{'transform': 'translateY(5px)'}" *ngIf="!last">west</span>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div [ngStyle]="{'font-size': '20px'}">
+        لا يوجد خطوط فى هذا اليوم
+    </div>
+</ng-template>
+
+<div [ngStyle]="{'text-align' : 'end'}" *ngIf="currentUser?.role != 'user'">
+    <a [routerLink]="['../update-line', linesDay.dayName]"> تعديل \ حذف</a>
+</div>

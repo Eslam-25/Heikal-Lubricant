@@ -1,0 +1,46 @@
+.products-body{
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.card-text{
+    font-size: 3rem;
+}
+
+.products-info{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.form-field{
+    width: 25rem;
+}
+
+.form-control, .form-label{
+    text-align: end;
+    color: black;
+    font-size: 20px;
+}
+
+.product-image{
+    display: inline;
+    float: right;
+    padding-right: 2rem; 
+    height: 67vh;
+    width: 50%;
+}
+
+.product-info{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 62vh;
+}
+
+.form-btn-save{
+    background-color: #A00807;
+    font-size: 1.2rem;
+    width: 15rem;
+}

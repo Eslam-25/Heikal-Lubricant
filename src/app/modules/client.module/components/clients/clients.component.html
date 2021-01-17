@@ -1,0 +1,62 @@
+<div [ngClass]="['clients-body']">
+    <div>
+        <span [ngClass]="['card-text']">
+            العملاء
+        </span>
+    </div>
+
+    <div>
+        <table mat-table [ngStyle]="{'width': '90%' , 'margin': '0 auto'}" [dataSource]="clients"
+            class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المسلسل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="clientName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اسم العميل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.clientName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phoneNumber">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef>رقم الهاتف </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.phoneNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> العنوان </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dayName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اليوم </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.dayName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lineName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المنطقة </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.lineName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تعديل </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#00005C'"
+                        [routerLink]="['../client-form']" [queryParams]="{clientId: element.id}">edit</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> حذف </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#990A0D'"
+                        (click)="openDeleteDialog(element)">delete</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

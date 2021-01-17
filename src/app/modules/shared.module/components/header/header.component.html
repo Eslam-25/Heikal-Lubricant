@@ -1,0 +1,21 @@
+<mat-toolbar>
+    <div (click)="onLogout()" *ngIf="currentUser?.isAuthenticated" [ngClass]="['logout-section']">
+        <mat-icon [ngStyle]="{'transform': 'translateY(25%)'}" [style.color]="'rgb(153, 10, 13)'">subdirectory_arrow_left</mat-icon>
+        <span>خروج </span>
+    </div> 
+
+    <div [ngClass]="['img-logo']" *ngIf="currentUser?.isAuthenticated">
+        <img src="../../../../../assets/logo.JPG" height="65rem" [routerLink]="['home']">
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <button [ngClass]="['btn-drawer']" *ngIf="currentUser?.isAuthenticated" mat-icon-button [matMenuTriggerFor]="beforeMenu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <app-menu-list ></app-menu-list>
+    </mat-menu>
+
+</mat-toolbar>

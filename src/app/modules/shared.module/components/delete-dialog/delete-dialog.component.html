@@ -1,0 +1,6 @@
+<h1 mat-dialog-title [ngStyle]="{'text-align': 'right'}">{{title}}</h1>
+<div mat-dialog-content [ngStyle]="{'font-size': '20px'}">{{message}}</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>لا</button>
+    <button mat-button mat-dialog-close (click)="deleteItem()">نعم</button>
+</div>

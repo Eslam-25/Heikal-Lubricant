@@ -1,0 +1,7 @@
+<h1 mat-dialog-title [ngStyle]="{'text-align': 'right'}">حذف خط</h1>
+<div mat-dialog-content [ngStyle]="{'font-size': '20px'}">هل تريد حذف خط <b>{{deletedLine.lineName}}</b> ؟</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>لا</button>
+    <button mat-button mat-dialog-close (click)="deleteLine()">نعم</button>
+</div>
+

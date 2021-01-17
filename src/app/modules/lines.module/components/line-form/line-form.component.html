@@ -1,0 +1,40 @@
+<div [ngClass]="['card-form']">
+    <div>
+        <span [ngClass]="['card-text']">
+            إضافة خط جديد
+        </span>
+    </div>
+
+    <br />
+
+    <form [formGroup]="lineFormInfo" (ngSubmit)="onSubmit()">
+        <div>
+            <mat-form-field class="example-form-field" [ngStyle]="{'width':'20rem'}" appearance="outline">
+                <mat-label [ngClass]="['form-label']">إضافة خط جديد</mat-label>
+                <input matInput type="text" [ngStyle]="{'text-align': 'end', 'font-size': '24px'}" name="lineName"
+                    formControlName="lineName">
+            </mat-form-field>
+            <div *ngIf="!lineName.valid && (lineName.dirty ||lineName.touched)" [ngClass]="['err-msg']">
+                من فضلك ادخل اسم الخط الجديد*
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            <mat-form-field appearance="outline" [ngStyle]="{'width':'20rem'}">
+                <mat-label [ngClass]="['form-label']">ايام الاسبوع</mat-label>
+                <mat-select [ngClass]="['form-label-select']" name="dayName" formControlName="dayName">
+                    <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day">{{day}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="!dayName.valid && (dayName.dirty ||dayName.touched)" [ngClass]="['err-msg']">
+                من فضلك اختر يوم الخط*
+            </div>
+        </div>
+
+        <br />
+        <button mat-raised-button color="primary" type="submit" [ngClass]="['form-btn-save']">حفظ</button>
+    </form>
+</div>

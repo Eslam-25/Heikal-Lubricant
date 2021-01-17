@@ -1,0 +1,37 @@
+<div *ngIf="currentUser?.role == 'user'">
+    <a [routerLink]="['../clients/list']" mat-menu-item [ngClass]="['menu-item']">العملاء</a>
+    <a [routerLink]="['../lines/list']" mat-menu-item [ngClass]="['menu-item']">الخطوط</a>
+    <a [routerLink]="['../products/list']" mat-menu-item [ngClass]="['menu-item']">المنتجات</a>
+</div>
+
+<div *ngIf="currentUser?.role != 'user'">
+    <a mat-menu-item [matMenuTriggerFor]="clients" [ngClass]="['menu-item']">
+        <span class="material-icons" [ngClass]="['menu-arrow-left']">arrow_left</span>
+        <span>العملاء</span>
+    </a>
+
+    <mat-menu #clients="matMenu">
+        <a [routerLink]="['../clients/client-form']" mat-menu-item [ngClass]="['menu-item']">عميل جديد</a>
+        <a [routerLink]="['../clients/list']" mat-menu-item [ngClass]="['menu-item']">العملاء</a>
+    </mat-menu>
+
+    <a mat-menu-item [matMenuTriggerFor]="lines" [ngClass]="['menu-item']">
+        <span class="material-icons" [ngClass]="['menu-arrow-left']">arrow_left</span>
+        <span>الخطوط</span>
+    </a>
+
+    <mat-menu #lines="matMenu">
+        <a [routerLink]="['../lines/new-line']" mat-menu-item [ngClass]="['menu-item']">خط جديد</a>
+        <a [routerLink]="['../lines/list']" mat-menu-item [ngClass]="['menu-item']">الخطوط</a>
+    </mat-menu>
+
+    <a mat-menu-item [matMenuTriggerFor]="products" [ngClass]="['menu-item']">
+        <span class="material-icons" [ngClass]="['menu-arrow-left']">arrow_left</span>
+        <span>المنتجات</span>
+    </a>
+
+    <mat-menu #products="matMenu">
+        <a [routerLink]="['../products/product']" *ngIf="this.currentUser?.role.toString() == 'admin'" mat-menu-item [ngClass]="['menu-item']">منتج جديد</a>
+        <a [routerLink]="['../products/list']" mat-menu-item [ngClass]="['menu-item']">المنتجات</a>
+    </mat-menu>
+</div>

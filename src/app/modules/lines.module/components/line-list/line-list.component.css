@@ -1,0 +1,10 @@
+.card-line-list{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.card-text{
+    font-size: 4rem;
+}

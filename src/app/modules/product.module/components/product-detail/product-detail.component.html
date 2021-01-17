@@ -1,0 +1,79 @@
+<div [ngClass]="['products-body']">
+    <div>
+        <span [ngClass]="['card-text']">
+            تفاصيل منتج
+        </span>
+    </div>
+    <br />
+    
+    <div [ngClass]="['product-image']">
+        <img src="../../../../../assets/logo.JPG" width="95%" height="100%"/>
+    </div>
+
+    <div [ngClass]="['product-info']">
+        <div [formGroup]="productFormInfo">
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> اسم المنتج</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="productName"
+                     formControlName="productName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field" [style.width.rem]="'8'" appearance="outline">
+                    <mat-label [ngClass]="['form-label']">Liter</mat-label>
+                    <input matInput type="number" [ngClass]="['form-control']" name="liter" formControlName="liter">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field" [style.width.rem]="'8'" [style.margin-left.rem]="'0.5'"
+                    appearance="outline">
+                    <mat-label [ngClass]="['form-label']">KM</mat-label>
+                    <input matInput type="number" [ngClass]="['form-control']" name="km" formControlName="km">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field" [style.width.rem]="'8'" [style.margin-left.rem]="'0.5'"
+                    appearance="outline">
+                    <mat-label [ngClass]="['form-label']">عدد الوحدات</mat-label>
+                    <input matInput type="number" [ngClass]="['form-control']" name="numberOfUnits"
+                        formControlName="numberOfUnits">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [style.width.rem]="'12'" appearance="outline">
+                    <mat-label [ngClass]="['form-label']">SAE</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="sae" formControlName="sae">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field" [style.width.rem]="'12'" [style.margin-left.rem]="'1'"
+                    appearance="outline">
+                    <mat-label [ngClass]="['form-label']">API</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="api" formControlName="api">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" *ngIf="this.currentUser?.role.toString() == 'admin'" 
+                    [style.width.rem]="'12'" appearance="outline">
+                    <mat-label [ngClass]="['form-label']">سعر الشراء</mat-label>
+                    <input matInput type="number" [ngClass]="['form-control']" name="buyPrice"
+                        formControlName="buyPrice">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field" [style.width.rem]="'12'" [style.margin-left.rem]="'1'"
+                    appearance="outline">
+                    <mat-label [ngClass]="['form-label']">سعر البيع</mat-label>
+                    <input matInput type="number" [ngClass]="['form-control']" name="sellingPrice"
+                        formControlName="sellingPrice">
+                </mat-form-field>
+            </div>
+
+            
+            <div>
+                <button mat-raised-button color="primary" [routerLink]="['../../list']" [ngClass]="['form-btn-save']">الرجوع الى المنتجات</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

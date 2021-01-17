@@ -1,0 +1,29 @@
+.client-form-body{
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.card-text{
+    font-size: 3rem;
+}
+
+.err-msg{
+    color: red;
+    margin-top: -1rem;
+}
+
+.form-field{
+    width: 25rem;
+}
+
+.form-control{
+    text-align: end;
+    font-size: 24px;
+}
+
+.form-btn-save{
+    background-color: #A00807;
+    font-size: 1.7rem;
+    width: 10rem;
+}

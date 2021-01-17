@@ -1,0 +1,35 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .btn-drawer{
+    border: 2px solid #A00807;
+    border-radius: 4px;
+    color: #A00807;
+  }
+
+  .img-logo{
+    width: 87%;
+    text-align: center;
+  }
+
+  .example-container {
+    width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+
+  .logout-section:hover{
+    cursor: pointer;
+  }

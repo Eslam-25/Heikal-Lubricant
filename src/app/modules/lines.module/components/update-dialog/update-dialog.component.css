@@ -1,0 +1,11 @@
+.err-msg{
+    color: red;
+    margin-top: -1rem;
+    font-size: 15px;
+}
+
+.form-btn-save{
+    background-color: #A00807;
+    font-size: 1.7rem;
+    width: 10rem;
+}
