@@ -9,7 +9,7 @@ import { LinesResolveService } from './guards/lines.resolve.service';
 const routes: Routes = [
   { path: 'list', component: LineListComponent, resolve: {lines: LinesResolveService} , canActivate: [CanUserActivate] },
   { path: 'new-line', component: LineFormComponent, canActivate: [LinesCanActivate] },
-  { path: 'update-line/:id', component: LineUpdateComponent, resolve: {lines: LinesResolveService} , canActivate: [LinesCanActivate] }
+  { path: 'update-line/:id', component: LineUpdateComponent, canActivate: [LinesCanActivate] }
 ];
 
 @NgModule({
