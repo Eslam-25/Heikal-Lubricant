@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/config/local-storage.service';
-import { UserRole } from 'src/app/modules/authentication.module/enums/roles.enum';
 import { UserAuthenticateModel } from 'src/app/modules/authentication.module/models/user.authenticate.model';
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
@@ -19,12 +18,14 @@ export class ProductDetailComponent implements OnInit {
     isActive: new FormControl(''),
     productName: new FormControl('', [Validators.required]),
     liter: new FormControl('', [Validators.required]),
-    km: new FormControl('', [Validators.required]),
-    numberOfUnits: new FormControl('', [Validators.required]),
+    kileMeter: new FormControl('', [Validators.required]),
+    numberOfUnit: new FormControl('', [Validators.required]),
     sae: new FormControl('', [Validators.required]),
     api: new FormControl('', [Validators.required]),
     buyPrice: new FormControl('', [Validators.required]),
     sellingPrice: new FormControl('', [Validators.required]),
+    imagePath: new FormControl('', [Validators.required]),
+    creationDate: new FormControl('', [Validators.required]),
   })
   product: ProductModel;
   currentUser: UserAuthenticateModel;

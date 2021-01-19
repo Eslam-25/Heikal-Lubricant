@@ -15,7 +15,7 @@ import { UserRole } from 'src/app/modules/authentication.module/enums/roles.enum
 })
 export class ProductsComponent implements OnInit {
 
-  displayedColumns: string[] = ['sae', 'api', 'km', 'liter', 'sellingPrice', 'productName', 'id'];
+  displayedColumns: string[] = ['sae', 'api', 'kileMeter', 'liter', 'sellingPrice', 'productName', 'id'];
   products: ProductModel[] = [];
   currentUser: UserAuthenticateModel;
 
@@ -36,12 +36,12 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  preparePermission(){
+  preparePermission() {
     this.currentUser = this.localStorageService.getCurrentUser();
-    if(this.currentUser.role == UserRole.ADMIN)
-      this.displayedColumns.splice(0 , 0 , ...['detail', 'delete', 'edit']);
+    if (this.currentUser.role == UserRole.ADMIN)
+      this.displayedColumns.splice(0, 0, ...['detail', 'delete', 'edit']);
     else
-      this.displayedColumns.splice(0 , 0 , ...['detail']);
+      this.displayedColumns.splice(0, 0, ...['detail']);
   }
 
   openDeleteDialog(deletedProduct: ProductModel) {
@@ -55,17 +55,16 @@ export class ProductsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event == "deleted") 
-        this.deleteProduct(deletedProduct.id);
+      if (result.event == "deleted")
+        this.deleteProduct(deletedProduct);
     })
   }
 
-  deleteProduct(productId: number){
-    const isDeleted = this.productService.deleteProduct(productId);
-        if (isDeleted) {
-          this.snackBarService.showSnackBar("تم حذف المنتج بنجاح");
-          this.prepareProducts();
-        }
+  deleteProduct(deletedProduct: ProductModel) {
+    this.productService.deleteProduct(deletedProduct).subscribe(result => {
+        this.prepareProducts();
+        this.snackBarService.showSnackBar("تم حذف المنتج بنجاح");
+    });
   }
 
 }

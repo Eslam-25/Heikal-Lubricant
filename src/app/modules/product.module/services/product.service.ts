@@ -1,41 +1,32 @@
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { HttpCleintService } from "../../shared.module/services/http.client.service";
 import { ProductModel } from "../models/product.model";
 
 @Injectable()
 export class ProductService{
-
-    products: ProductModel[] = [
-        {id: 1 , productName: 'ازرق' ,api: '20w50',sae: '50' ,buyPrice: 100 ,isActive: true,km: 2000, liter: 20,numberOfUnits:1,sellingPrice: 150},
-        {id: 2 , productName: 'اسود' ,api: '20w50',sae: '50' ,buyPrice: 100 ,isActive: true,km: 2000, liter: 20,numberOfUnits:1,sellingPrice: 150},
-        {id: 3 , productName: 'توكتوك' ,api: '20w50',sae: '50' ,buyPrice: 100 ,isActive: true,km: 2000, liter: 20,numberOfUnits:1,sellingPrice: 150},
-    ];
-
-    constructor(){}
+    constructor(private http: HttpCleintService<ProductModel>){}
 
     addProduct(newProduct: ProductModel){
-        newProduct.id = this.products.length + 1;
-        newProduct.isActive = true;
-        this.products.push(newProduct);
+        newProduct.imagePath = "iamgea";
+        delete newProduct['creationDate'];
+        delete newProduct.id;
+        delete newProduct.isActive;
+        return this.http.post("product", newProduct);
     }
 
     getProducts(){
-        return of(this.products);
+        return this.http.get("product");
     }
 
     getProduct(id: number){
-        const product= this.products.find(p => p.id == id);
-        return of(product)
+        return this.http.getById("product", id)
     }
 
-    deleteProduct(id: number){
-        const productIndex = this.products.findIndex(p => p.id == id);
-        this.products.splice(productIndex, 1);
-        return true;
+    deleteProduct(deletedProduct: ProductModel){
+        return this.http.delete("product", deletedProduct);
     }
 
     updateProduct(updatedProduct: ProductModel){
-        this.deleteProduct(updatedProduct.id);
-        this.addProduct(updatedProduct);
+        return this.http.update("product", updatedProduct);
     }
 }

@@ -8,6 +8,7 @@ import { SharedModule } from './modules/shared.module/shared.module';
 import { AuthenticationModule } from './modules/authentication.module/authentication.module';
 import { HomeComponent } from './home/home.component';
 import { LocalStorageService } from './config/local-storage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LocalStorageService } from './config/local-storage.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    HttpClientModule,
     AuthenticationModule,
   ],
   providers: [LocalStorageService],
