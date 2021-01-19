@@ -34,7 +34,9 @@ export class ClientFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.daysOfWeek = this.lineService.daysOfWeek();
+     this.lineService.daysOfWeek().subscribe(items => {
+      this.daysOfWeek = items.map(d => d.dayName)
+     });
     this.prepareLinesOfSelectedDay();
     this.activatedRoute.queryParams.subscribe(data => {
       this.updatedClientId = data['clientId'] ? data['clientId'] : 0;

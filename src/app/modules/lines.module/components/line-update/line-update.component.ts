@@ -34,6 +34,7 @@ export class LineUpdateComponent implements OnInit {
   }
 
   prepareLinesOfDay(){
+    ///get data from resolver
     this.activatedRoute.data.subscribe(linesData => {
       this.linesOfDay = linesData.lines.filter(line => line.dayName === this.lineDay);
       const activeLines = linesData.lines.filter(line => line.dayName === this.lineDay && line.isActive);
@@ -51,6 +52,7 @@ export class LineUpdateComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result.event === 'deleted'){
         this.prepareLinesOfDay();
+        window.location.reload();
       }
     })
   }
@@ -66,6 +68,7 @@ export class LineUpdateComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result.event === 'updated'){
         this.prepareLinesOfDay();
+        window.location.reload();
       }
     })
   }
