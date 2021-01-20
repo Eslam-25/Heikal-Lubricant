@@ -1,7 +1,10 @@
 <div [ngClass]="['client-form-body']">
     <div>
-        <span [ngClass]="['card-text']">
+        <span [ngClass]="['card-text']" *ngIf="updatedClientId == 0">
             إضافة عميل جديد
+        </span>
+        <span [ngClass]="['card-text']" *ngIf="updatedClientId > 0">
+             تعديل عميل
         </span>
     </div>
 
@@ -47,8 +50,8 @@
                 <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
                     <mat-label [ngClass]="['form-label']"> اليوم </mat-label>
                     <mat-select [ngClass]="['form-label-select']" name="dayName" formControlName="dayName">
-                        <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day">
-                            {{day}}
+                        <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day.dayName">
+                            {{day.dayName}}
                         </mat-option>
                     </mat-select>
 
@@ -61,16 +64,27 @@
             <div>
                 <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
                     <mat-label [ngClass]="['form-label']"> المنطقة </mat-label>
-                    <mat-select [ngClass]="['form-label-select']" name="lineName" formControlName="lineName">
-                        <mat-option *ngFor="let line of linesOfDay" [ngClass]="['form-label-select']" [value]="line">
-                            {{line}}
+                    <mat-select [ngClass]="['form-label-select']" name="lineId" formControlName="lineId">
+                        <mat-option *ngFor="let line of linesOfDay" [ngClass]="['form-label-select']" [value]="line.id">
+                            {{line.lineName}}
                         </mat-option>
                     </mat-select>
 
                 </mat-form-field>
-                <div *ngIf="!lineName.valid && (lineName.dirty ||lineName.touched)" [ngClass]="['err-msg']">
+                <div *ngIf="!lineId.valid && (lineId.dirty ||lineId.touched)" [ngClass]="['err-msg']">
                     <span *ngIf="linesOfDay?.length > 0">من فضلك اختار المنطقة *</span>
                 </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> حالة العميل </mat-label>
+                    <mat-select [ngClass]="['form-label-select']" name="isActive" formControlName="isActive">
+                        <mat-option [ngClass]="['form-label-select']" [value]="true">نشط</mat-option>
+                        <mat-option [ngClass]="['form-label-select']" [value]="false">غير نشط</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
             </div>
 
             <div>

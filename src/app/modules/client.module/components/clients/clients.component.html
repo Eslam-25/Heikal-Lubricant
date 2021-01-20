@@ -4,39 +4,47 @@
             العملاء
         </span>
     </div>
+    <br />
 
-    <div>
-        <table mat-table [ngStyle]="{'width': '90%' , 'margin': '0 auto'}" [dataSource]="clients"
-            class="mat-elevation-z8">
+    <div [ngStyle]="{'width': '90%' , 'margin': '0 auto'}">
+        <table mat-table [ngStyle]="{'width': '100%'}" [dataSource]="clients" class="mat-elevation-z8" matSort>
 
             <ng-container matColumnDef="id">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المسلسل </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> المسلسل </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
 
             <ng-container matColumnDef="clientName">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اسم العميل </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> اسم العميل </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.clientName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="phoneNumber">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef>رقم الهاتف </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header>رقم الهاتف </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.phoneNumber}} </td>
             </ng-container>
 
             <ng-container matColumnDef="address">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> العنوان </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> العنوان </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.address}} </td>
             </ng-container>
 
             <ng-container matColumnDef="dayName">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> اليوم </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> اليوم </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.dayName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="lineName">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> المنطقة </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> المنطقة </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.lineName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isActive">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> حالة العميل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element">
+                    <div *ngIf="element.isActive">نشط</div>
+                    <div *ngIf="!element.isActive">غير نشط</div>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="edit">
@@ -57,6 +65,12 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </div>

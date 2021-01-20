@@ -29,7 +29,7 @@ import { HttpCleintService } from './services/http.client.service';
   ],
   providers:[
     SnackBarServie,
-    HttpCleintService
+    HttpCleintService,
   ],
   exports: [
     LayoutComponent
