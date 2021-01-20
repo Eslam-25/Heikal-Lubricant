@@ -1,0 +1,39 @@
+.clients-body{
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.card-text{
+    font-size: 3rem;
+}
+
+.table-th{
+    /* text-align: right; */
+    font-size: 20px;
+    justify-content: flex-end;
+}
+
+.table-td{
+    text-align: center;
+    font-size: 15px;
+}
+
+.table-th-btn{
+    width: 10%;
+    font-size: 20px;
+}
+
+.table-td-btn{
+    text-align: left;
+    font-size: 15px;
+}
+
+.table-btn:hover{
+    cursor: pointer;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+  }

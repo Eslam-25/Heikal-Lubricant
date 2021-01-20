@@ -1,0 +1,61 @@
+<div [ngClass]="['clients-body']">
+    <div>
+        <span [ngClass]="['card-text']">
+            المستخدمين
+        </span>
+    </div>
+    <br />
+
+    <div [ngStyle]="{'width': '90%' , 'margin': '0 auto'}">
+        <table mat-table [ngStyle]="{'width': '100%'}" [dataSource]="users" class="mat-elevation-z8" matSort>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> المسلسل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> اسم العميل </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.userName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="roleName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> دور الموظف </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.roleName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isActive">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> حالة الموظف </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element">
+                    <div *ngIf="element.isActive">نشط</div>
+                    <div *ngIf="!element.isActive">غير نشط</div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تعديل </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#00005C'"
+                        [routerLink]="['../user']" [queryParams]="{userId: element.id}">edit</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> حذف </th>
+                <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
+                    <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#990A0D'"
+                        (click)="openDeleteDialog(element)">delete</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>

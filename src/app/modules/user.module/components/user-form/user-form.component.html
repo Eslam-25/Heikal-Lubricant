@@ -1,0 +1,72 @@
+<div [ngClass]="['client-form-body']">
+    <div>
+        <span [ngClass]="['card-text']" *ngIf="updatedUserId == 0">
+            إضافة مستخدم جديد
+        </span>
+        <span [ngClass]="['card-text']" *ngIf="updatedUserId > 0">
+             تعديل مستخدم
+        </span>
+    </div>
+
+    <br />
+
+    <div>
+        <form [formGroup]="userFormInfo" (ngSubmit)="onSubmit()">
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> اسم المستخدم</mat-label>
+                    <input matInput type="text" [ngClass]="['form-control']" name="userName"
+                        formControlName="userName">
+                </mat-form-field>
+                <div *ngIf="!userName.valid && (userName.dirty ||userName.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل اسم المستخدم *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> الرقم السري</mat-label>
+                    <input matInput [type]="typeOfInput" [ngClass]="['form-control']" name="password"
+                        formControlName="password">
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="showPassword">visibility</mat-icon>
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="!showPassword">visibility_off</mat-icon>
+                </mat-form-field>
+                <div *ngIf="!password.valid && (password.dirty ||password.touched)" [ngClass]="['err-msg']">
+                    من فضلك ادخل الرقم السري *
+                </div>
+            </div>
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> دور المستخدم </mat-label>
+                    <mat-select [ngClass]="['form-label-select']" name="roleId" formControlName="roleId">
+                        <mat-option *ngFor="let role of roles" [ngClass]="['form-label-select']" [value]="role.id">
+                            {{role.roleName}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                <div *ngIf="!roleId.valid && (roleId.dirty ||roleId.touched)" [ngClass]="['err-msg']">
+                    من فضلك اختار دور المستخدم *
+                </div>
+            </div>
+
+
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> حالة المستخدم </mat-label>
+                    <mat-select [ngClass]="['form-label-select']" name="isActive" formControlName="isActive">
+                        <mat-option [ngClass]="['form-label-select']" [value]="true">نشط</mat-option>
+                        <mat-option [ngClass]="['form-label-select']" [value]="false">غير نشط</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+            </div>
+
+            <div>
+                <button mat-raised-button color="primary" type="submit" [ngClass]="['form-btn-save']">حفظ</button>
+            </div>
+
+        </form>
+    </div>
+</div>

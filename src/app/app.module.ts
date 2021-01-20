@@ -9,6 +9,7 @@ import { AuthenticationModule } from './modules/authentication.module/authentica
 import { HomeComponent } from './home/home.component';
 import { LocalStorageService } from './config/local-storage.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserModule } from './modules/user.module/user.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
+    UserModule,
     AuthenticationModule,
   ],
   providers: [LocalStorageService],
