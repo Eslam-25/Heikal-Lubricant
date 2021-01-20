@@ -5,6 +5,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { AngularMaterial } from 'src/app/angular.material.module';
 import { UserService } from './services/user.service';
+import { AdminCanActivateGuardsService } from './guards/can-active.admin.guards';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserService } from './services/user.service';
     UserRoutingModule
   ],
   providers: [
-    UserService
+    UserService,
+    AdminCanActivateGuardsService
   ]
 })
 export class UserModule { }

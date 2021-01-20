@@ -19,8 +19,10 @@
             <div>
                 <mat-form-field class="example-form-field" [ngStyle]="{'width':'20rem'}" appearance="outline">
                     <mat-label [ngClass]="['form-label']">كلمة السر</mat-label>
-                    <input matInput type="text" [ngStyle]="{'text-align': 'end', 'font-size': '24px'}" name="password"
+                    <input matInput [type]="typeOfInput" [ngStyle]="{'text-align': 'end', 'font-size': '24px'}" name="password"
                         type="password" formControlName="password">
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="showPassword">visibility</mat-icon>
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="!showPassword">visibility_off</mat-icon>
                 </mat-form-field>
                 <div *ngIf="!password.valid && (password.dirty ||password.touched)" [ngClass]="['err-msg']">
                     من فضلك ادخل كلمة السر *

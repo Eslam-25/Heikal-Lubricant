@@ -1,32 +1,25 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
 import { LocalStorageService } from "src/app/config/local-storage.service";
-import { UserRole } from "../enums/roles.enum";
+import { HttpCleintService } from "../../shared.module/services/http.client.service";
 import { UserAuthenticateModel } from "../models/user.authenticate.model";
 import { UserLoginModel } from "../models/user.login.model";
 
 @Injectable()
-export class AuthenticationService{
-
-    constructor(private localStorageService: LocalStorageService){}
+export class AuthenticationService {
 
     loggedInUser: UserAuthenticateModel = null;
-    users: UserLoginModel[] = [
-        {userName: 'user', password: 'user' , role: UserRole.USER},
-        {userName: 'staff', password: 'staff', role: UserRole.STAFF},
-        {userName: 'admin', password: 'admin', role: UserRole.ADMIN}
-    ];
+    constructor(private localStorageService: LocalStorageService, private http: HttpCleintService<any>) { }
 
-    login(userName: string, password: string): Observable<UserAuthenticateModel>{
-        const loggedUser = this.users.find(user => user.userName == userName && user.password == password);
-        if(loggedUser){
-            this.loggedInUser = new UserAuthenticateModel(loggedUser.userName, true, loggedUser.role);
-            this.localStorageService.setCurrentUser(this.loggedInUser);
-        }
-        return of(this.loggedInUser);
+    login(userName: string, password: string) {
+        return this.http.post("login", { userName: userName, password: password });
     }
 
-    logout(){
+    setLoggedInUser(loggedUserModel: UserLoginModel){
+        this.loggedInUser = new UserAuthenticateModel(loggedUserModel.userName, true, loggedUserModel.role);
+        this.localStorageService.setCurrentUser(this.loggedInUser);
+    }
+
+    logout() {
         this.loggedInUser = null;
     }
 }

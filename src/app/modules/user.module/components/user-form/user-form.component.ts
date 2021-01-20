@@ -78,13 +78,13 @@ export class UserFormComponent implements OnInit {
       
       this.userService.addUser(addedUser).subscribe(() => {
         this.snackBarService.showSnackBar("تم اضافة المستخدم بنجاح");
-        this.router.navigate(["users"]);
+        this.router.navigate(["../list"]);
       })
     }
     else if (this.userFormInfo.valid && this.updatedUserId) {
       this.userService.updateUser(this.userFormInfo.value).subscribe(() => {
         this.snackBarService.showSnackBar("تم تعديل بيانات المستخدم بنجاح");
-        this.router.navigate(["users"]);
+        this.router.navigate(["../list"]);
       })
     }
 
