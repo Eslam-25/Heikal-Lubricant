@@ -24,11 +24,10 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   deleteClient(){
-    const isDeleted = this.clientService.remove(this.deletedClient.id);
-    if(isDeleted){
+    this.clientService.remove(this.deletedClient).subscribe(() => {
       this.dialogRef.close({event: 'deleted'});
       this.snackBarService.showSnackBar("تم حذف العميل بنجاح");
-    }
+    })
   }
 
 

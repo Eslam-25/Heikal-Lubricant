@@ -15,8 +15,10 @@ export class LineListComponent implements OnInit {
   constructor(private lineService: LineService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.days = this.lineService.daysOfWeek();
-    this.preparedDaysWithThemLines();
+    this.lineService.daysOfWeek().subscribe(items => {
+      this.days = items.map(d => d.dayName);
+      this.preparedDaysWithThemLines();
+    });
   }
 
   preparedDaysWithThemLines(){

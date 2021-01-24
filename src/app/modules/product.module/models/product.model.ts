@@ -4,11 +4,12 @@ export class ProductModel{
         public productName: string,
         public isActive: boolean,
         public liter: number,
-        public km: number,
-        public numberOfUnits,
+        public kileMeter: number,
+        public numberOfUnit: number,
         public sae: string,
         public api: string,
         public buyPrice: number,
-        public sellingPrice: number
+        public sellingPrice: number,
+        public imagePath: string
     ){}
 }

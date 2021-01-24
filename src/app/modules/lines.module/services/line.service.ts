@@ -1,45 +1,43 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { LineViewModel } from "../models/line-view.model";
+import { HttpCleintService } from "../../shared.module/services/http.client.service";
 import { LineModel } from "../models/line.model";
-import { delay } from 'rxjs/internal/operators';
 
 @Injectable()
 export class LineService{
-    constructor(){}
+    
+    urlSegment: string = "line";
+    constructor(private http: HttpCleintService<any>){}
 
-    lines: LineModel[] = [
+    lines: LineViewModel[] = [
         {dayName: 'السبت' , id: 1 , lineName: 'محلة دمنة',isActive: true },
         {dayName: 'السبت' , id: 2 , lineName: 'دكرنس', isActive: false},
         {dayName: 'الخميس' , id: 3 , lineName: 'الزرقا', isActive: true}
     ];
 
-    getLines(): Observable<LineModel[]>{
-        return of(this.lines).pipe(delay(1500));
+    getLines(): Observable<LineViewModel[]>{
+        return this.http.get(this.urlSegment);
     }
 
-    getLine(id: number): Observable<LineModel>{
+    getLine(id: number): Observable<LineViewModel>{
         const result = this.lines.find(l => l.id === id);
         return of(result);
     }
 
     add(newLine: LineModel){
-        newLine.id = this.lines.length + 1;
-        newLine.isActive = true;
-        this.lines.push(newLine);
+        return this.http.post(this.urlSegment , newLine);
     }
 
-    remove(id: number): boolean{
-        const lineIndex = this.lines.findIndex(l => l.id === id);
-        this.lines[lineIndex].isActive = false;
-        return true;
+    remove(deletedLine: LineModel){
+        return this.http.delete(this.urlSegment , deletedLine);
     }
 
     update(updateLine: LineModel){
-        this.remove(updateLine.id);
-        this.add(updateLine);
+        return this.http.update(this.urlSegment , updateLine);
     }
 
     daysOfWeek(){
-        return ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+        return this.http.get('day');
     }
 }

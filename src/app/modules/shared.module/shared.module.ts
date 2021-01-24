@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { SnackBarServie } from './components/snack-bar/snack-bar.service';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { HttpCleintService } from './services/http.client.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     DeleteDialogComponent
   ],
   providers:[
-    SnackBarServie
+    SnackBarServie,
+    HttpCleintService,
   ],
   exports: [
     LayoutComponent

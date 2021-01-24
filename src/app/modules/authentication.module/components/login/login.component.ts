@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserLoginModel } from '../../models/user.login.model';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -15,6 +16,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
   });
   failedLogin: boolean = false;
+  showPassword: boolean = false;
+  typeOfInput: string = 'password';
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -30,22 +34,26 @@ export class LoginComponent implements OnInit {
   get userName() {
     return this.loginInfo.get('userName');
   }
-
   get password() {
     return this.loginInfo.get('password')
+  }
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+    this.showPassword ? this.typeOfInput = "text" : this.typeOfInput = "password";
   }
 
   onSubmit() {
     this.loginInfo.markAllAsTouched();
     if (this.loginInfo.valid) {
-      this.authenticationService.login(this.userName.value, this.password.value).subscribe(loggedUser => {
-        if (loggedUser){
+
+      this.authenticationService.login(this.userName.value, this.password.value).subscribe((loggedUser: UserLoginModel) => {
+          this.authenticationService.setLoggedInUser(loggedUser);
           this.activatedRoute.queryParams.subscribe(data => {
             const url = data['returnUrl'] && !data['returnUrl'].include('not-found') ? data['returnUrl'] : 'home';
             this.router.navigate([url]);
           });
-        }else
-          this.failedLogin = true;
+      },() => {
+        this.failedLogin = true;
       });
     }
 

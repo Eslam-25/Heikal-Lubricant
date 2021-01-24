@@ -1,46 +1,31 @@
 <div [ngClass]="['clients-body']">
     <div>
         <span [ngClass]="['card-text']">
-            العملاء
+            المستخدمين
         </span>
     </div>
     <br />
 
     <div [ngStyle]="{'width': '90%' , 'margin': '0 auto'}">
-        <table mat-table [ngStyle]="{'width': '100%'}" [dataSource]="clients" class="mat-elevation-z8" matSort>
+        <table mat-table [ngStyle]="{'width': '100%'}" [dataSource]="users" class="mat-elevation-z8" matSort>
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> المسلسل </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="clientName">
+            <ng-container matColumnDef="userName">
                 <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> اسم العميل </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.clientName}} </td>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.userName}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="phoneNumber">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header>رقم الهاتف </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.phoneNumber}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="address">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> العنوان </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.address}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="dayName">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> اليوم </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.dayName}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="lineName">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> المنطقة </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.lineName}} </td>
+            <ng-container matColumnDef="roleName">
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> دور الموظف </th>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.roleName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="isActive">
-                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> حالة العميل </th>
+                <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef mat-sort-header> حالة الموظف </th>
                 <td mat-cell [ngClass]="['table-td']" *matCellDef="let element">
                     <div *ngIf="element.isActive">نشط</div>
                     <div *ngIf="!element.isActive">غير نشط</div>
@@ -51,7 +36,7 @@
                 <th mat-header-cell [ngClass]="['table-th-btn']" *matHeaderCellDef> تعديل </th>
                 <td mat-cell [ngClass]="['table-td-btn']" *matCellDef="let element">
                     <span class="material-icons" [ngClass]="['table-btn']" [style.color]="'#00005C'"
-                        [routerLink]="['../client-form']" [queryParams]="{clientId: element.id}">edit</span>
+                        [routerLink]="['../user']" [queryParams]="{userId: element.id}">edit</span>
                 </td>
             </ng-container>
 

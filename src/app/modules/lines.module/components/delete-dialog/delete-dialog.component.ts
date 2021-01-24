@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { LineModel } from '../../models/line.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LineService } from '../../services/line.service';
 import { SnackBarServie } from 'src/app/modules/shared.module/components/snack-bar/snack-bar.service';
+import { LineModel } from '../../models/line.model';
+import { DayModel } from '../../models/day.model';
 
 @Component({
   selector: 'app-line-update-dialog',
@@ -12,6 +13,8 @@ import { SnackBarServie } from 'src/app/modules/shared.module/components/snack-b
 export class DeleteDialogComponent implements OnInit {
 
   deletedLine: LineModel;
+  daysOfWeek: DayModel[];
+
   constructor(@Inject(MAT_DIALOG_DATA) private dialogData: any,
     private lineService: LineService,
     private snackBarService: SnackBarServie,
@@ -21,13 +24,16 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.lineService.daysOfWeek().subscribe(items => {
+      this.daysOfWeek = items;
+      this.deletedLine.dayId = items.find(d => d.dayName == this.dialogData.deletedLine.dayName).id;
+    })
   }
 
   deleteLine() {
-    const isDeleted = this.lineService.remove(this.deletedLine.id);
-    if(isDeleted){
+    this.lineService.remove(this.deletedLine).subscribe(() => {
       this.dialogRef.close({event: 'deleted'});
       this.snackBarService.showSnackBar("تم حذف الخط بنجاح");
-    }
+    });
   }
 }

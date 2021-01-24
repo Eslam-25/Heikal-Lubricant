@@ -4,8 +4,7 @@ export class ClientModel {
         public clientName: string, 
         public phoneNumber: string, 
         public address: string, 
-        public dayName: string, 
-        public lineName: string, 
+        public lineId: number, 
         public isActive: boolean
     ) { }
 }

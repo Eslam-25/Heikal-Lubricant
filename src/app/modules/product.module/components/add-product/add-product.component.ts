@@ -16,12 +16,14 @@ export class AddProductComponent implements OnInit {
     isActive: new FormControl(''),
     productName: new FormControl('', [Validators.required]),
     liter: new FormControl('', [Validators.required]),
-    km: new FormControl('', [Validators.required]),
-    numberOfUnits: new FormControl('', [Validators.required]),
+    kileMeter: new FormControl('', [Validators.required]),
+    numberOfUnit: new FormControl('', [Validators.required]),
     sae: new FormControl('', [Validators.required]),
     api: new FormControl('', [Validators.required]),
     buyPrice: new FormControl('', [Validators.required]),
     sellingPrice: new FormControl('', [Validators.required]),
+    imagePath: new FormControl(''),
+    creationDate: new FormControl(''),
   })
   updatedProductId: number = 0;
   isInValid: boolean = false;
@@ -70,18 +72,24 @@ export class AddProductComponent implements OnInit {
   onSubmit() {
     if (this.productFormInfo.valid) {
       if (this.updatedProductId) {
-        this.productService.updateProduct(this.productFormInfo.value);
-        this.snackBarService.showSnackBar("تم تعديل المنتج بنجاح");
+        this.productService.updateProduct(this.productFormInfo.value).subscribe(() => {
+          this.redirectToProductList("تم تعديل المنتج بنجاح");
+        });
       } else {
-        this.productService.addProduct(this.productFormInfo.value);
-        this.snackBarService.showSnackBar("تم اضافة المنتج بنجاح");
+        this.productService.addProduct(this.productFormInfo.value).subscribe(() => {
+          this.redirectToProductList("تم اضافة المنتج بنجاح");
+        });
       }
-      this.isInValid = false;
-      this.router.navigate(["products/list"]);
-    }else{
+    } else {
       this.isInValid = true;
       this.productFormInfo.markAllAsTouched();
     }
+  }
+
+  redirectToProductList(message: string) {
+    this.snackBarService.showSnackBar(message);
+    this.isInValid = false;
+    this.router.navigate(["products/list"]);
   }
 
 }

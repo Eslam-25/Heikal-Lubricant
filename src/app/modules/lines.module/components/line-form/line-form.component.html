@@ -24,12 +24,12 @@
         <div>
             <mat-form-field appearance="outline" [ngStyle]="{'width':'20rem'}">
                 <mat-label [ngClass]="['form-label']">ايام الاسبوع</mat-label>
-                <mat-select [ngClass]="['form-label-select']" name="dayName" formControlName="dayName">
-                    <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day">{{day}}
+                <mat-select [ngClass]="['form-label-select']" name="dayId" formControlName="dayId">
+                    <mat-option *ngFor="let day of daysOfWeek" [ngClass]="['form-label-select']" [value]="day.id">{{day.dayName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <div *ngIf="!dayName.valid && (dayName.dirty ||dayName.touched)" [ngClass]="['err-msg']">
+            <div *ngIf="!dayId.valid && (dayId.dirty ||dayId.touched)" [ngClass]="['err-msg']">
                 من فضلك اختر يوم الخط*
             </div>
         </div>

@@ -1,42 +1,42 @@
 import { Injectable } from "@angular/core";
 import { of } from "rxjs";
+import { HttpCleintService } from "../../shared.module/services/http.client.service";
 import { ClientModel } from "../models/client.model";
 
 @Injectable()
 export class ClientServie{
-
-    clients: ClientModel[] = [
-        {id: 1,clientName: 'احمد', address: 'Mansoura',isActive: true,phoneNumber: '123' , dayName: 'السبت',lineName: 'محلة دمنة'},
-        {id: 2,clientName: 'احمد', address: 'Mansoura',isActive: true,phoneNumber: '123' , dayName: 'الاحد',lineName: 'محلة دمنة'},
-        {id: 3,clientName: 'احمد', address: 'Mansoura',isActive: true,phoneNumber: '123' , dayName: 'الاربع',lineName: 'محلة دمنة'},
-        {id: 4,clientName: 'احمد', address: 'Mansoura',isActive: true,phoneNumber: '123' , dayName: 'الجمعة',lineName: 'محلة دمنة'},
-    ];
-
-    constructor(){}
+    urlSegment = "client";
+    constructor(private http: HttpCleintService<any>){}
 
     getClients(){
-        return of(this.clients);
+        return this.http.get(this.urlSegment);
     }
 
-    add(newClient: ClientModel){
-        newClient.id = this.clients.length + 1;
-        newClient.isActive = true;
-        this.clients.push(newClient);
+    add(newClient){
+        delete newClient.id;
+        delete newClient.isActive;
+        delete newClient.dayName;
+        return this.http.post(this.urlSegment , newClient);
     }
 
     getClient(id: number){
-        return of(this.clients.find(c => c.id == id));
+        return this.http.getById(this.urlSegment , id);
     }
 
-    remove(id: number){
-        const clientIndex = this.clients.findIndex(c => c.id == id);
-        this.clients[clientIndex].isActive = false;
-        return true;
+    remove(deletedItem){
+        var deletedClient: ClientModel = new ClientModel(
+            deletedItem.id, 
+            deletedItem.clientName, 
+            deletedItem.phoneNumber, 
+            deletedItem.address , 
+            deletedItem.line.id,
+            deletedItem.isActive);     
+        return this.http.delete(this.urlSegment , deletedClient);
     }
 
-    update(updatedClient: ClientModel){
-        this.remove(updatedClient.id);
-        this.add(updatedClient)
+    update(updatedClient){
+        delete updatedClient.dayName;
+        return this.http.update(this.urlSegment , updatedClient);
     }
 
 }

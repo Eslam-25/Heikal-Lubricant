@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { LineViewModel } from '../../models/line-view.model';
 import { LineModel } from '../../models/line.model';
+import { LineService } from '../../services/line.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 
@@ -18,12 +20,12 @@ export class LineUpdateComponent implements OnInit {
   });
 
   lineDay: string = '';
-  linesOfDay: LineModel[] = [];
+  linesOfDay: LineViewModel[] = [];
   displayedColumns: string[] = ['delete', 'edit' ,'isActive','lineName' ,'id'];
   isUpdate: boolean = true;
   lineStatus: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private activatedRoute: ActivatedRoute, private lineService: LineService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => {
@@ -34,9 +36,10 @@ export class LineUpdateComponent implements OnInit {
   }
 
   prepareLinesOfDay(){
-    this.activatedRoute.data.subscribe(linesData => {
-      this.linesOfDay = linesData.lines.filter(line => line.dayName === this.lineDay);
-      const activeLines = linesData.lines.filter(line => line.dayName === this.lineDay && line.isActive);
+    ///get data from resolver
+    this.lineService.getLines().subscribe(linesData => {
+      this.linesOfDay = linesData.filter(line => line.dayName === this.lineDay);
+      const activeLines = linesData.filter(line => line.dayName === this.lineDay && line.isActive);
       this.lineFormInfo.get('lines').setValue(activeLines.map(line => line.id));
     });
   }

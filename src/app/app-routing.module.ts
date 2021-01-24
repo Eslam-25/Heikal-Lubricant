@@ -6,7 +6,8 @@ const routes: Routes = [
   {path: 'home',component: HomeComponent},
   {path: 'lines', loadChildren: () => import('./modules/lines.module/lines.module').then(m=>m.LinesModule)},
   {path: 'clients', loadChildren: () => import('./modules/client.module/client.module').then(c=>c.ClientModule)},
-  {path: 'products', loadChildren: () => import('./modules/product.module/product.module').then(p=>p.ProductModule)}
+  {path: 'products', loadChildren: () => import('./modules/product.module/product.module').then(p=>p.ProductModule)},
+  {path: 'users', loadChildren: () => import('./modules/user.module/user.module').then(p=>p.UserModule)}
 ];
 
 @NgModule({
