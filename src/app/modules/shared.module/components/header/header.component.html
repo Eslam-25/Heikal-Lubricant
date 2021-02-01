@@ -1,8 +1,6 @@
 <mat-toolbar>
-    <div (click)="onLogout()" *ngIf="currentUser?.isAuthenticated" [ngClass]="['logout-section']">
-        <mat-icon [ngStyle]="{'transform': 'translateY(25%)'}" [style.color]="'rgb(153, 10, 13)'">subdirectory_arrow_left</mat-icon>
-        <span>خروج </span>
-    </div> 
+
+    <ng-content select=".logout-icon"></ng-content>
 
     <div [ngClass]="['img-logo']" *ngIf="currentUser?.isAuthenticated">
         <img src="../../../../../assets/logo.JPG" height="65rem" [routerLink]="['home']">

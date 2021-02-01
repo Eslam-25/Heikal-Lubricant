@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class HttpCleintService<T>{
 
-    baseUrl = "http://localhost:5000/api/";
+    baseUrl = environment.applicationAPI;
     constructor(private http: HttpClient){}
 
     post(url:string, element: T){

@@ -5,17 +5,21 @@ import { LogoutComponent } from 'src/app/modules/authentication.module';
 import { UserAuthenticateModel } from 'src/app/modules/authentication.module/models/user.authenticate.model';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'logout-icon',
+  templateUrl: './logout-icon.component.html',
+  styleUrls: ['./logout-icon.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class LogoutIconComponent implements OnInit {
 
   currentUser: UserAuthenticateModel;
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private dialog: MatDialog,private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.currentUser = this.localStorageService.getCurrentUser();
+  }
+
+  onLogout(){
+    this.dialog.open(LogoutComponent)
   }
   
 }

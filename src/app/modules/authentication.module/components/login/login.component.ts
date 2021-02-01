@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.userName.value, this.password.value).subscribe((loggedUser: UserLoginModel) => {
           this.authenticationService.setLoggedInUser(loggedUser);
           this.activatedRoute.queryParams.subscribe(data => {
-            const url = data['returnUrl'] && !data['returnUrl'].include('not-found') ? data['returnUrl'] : 'home';
+            const url = data['returnUrl'] ? data['returnUrl'] : 'home';
             this.router.navigate([url]);
           });
       },() => {
