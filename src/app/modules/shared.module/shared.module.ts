@@ -9,6 +9,8 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { SnackBarServie } from './components/snack-bar/snack-bar.service';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { HttpCleintService } from './services/http.client.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientInterceptor } from './services/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { HttpCleintService } from './services/http.client.service';
   providers:[
     SnackBarServie,
     HttpCleintService,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true}
   ],
   exports: [
     LayoutComponent
