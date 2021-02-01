@@ -43,7 +43,7 @@
 
             <ng-container matColumnDef="sellingPrice">
                 <th mat-header-cell [ngClass]="['table-th']" *matHeaderCellDef> سعر البيع </th>
-                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.sellingPrice}} </td>
+                <td mat-cell [ngClass]="['table-td']" *matCellDef="let element"> {{element.sellingPrice | currencypipe}} </td>
             </ng-container>
 
 

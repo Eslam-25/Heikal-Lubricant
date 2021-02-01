@@ -7,11 +7,14 @@ import { ProductService } from './services/product.service';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { AdminGuardsService } from './guards/admin-guards.service';
 import { CanActivateProductService } from './guards/can-activate.product.service';
+import { CurrencyPipe } from './pipes/currencypipe';
 
 @NgModule({
   declarations: [
     AddProductComponent, 
-    ProductsComponent, ProductDetailComponent, 
+    ProductsComponent, 
+    ProductDetailComponent, 
+    CurrencyPipe
   ],
   imports: [
     CommonModule,
