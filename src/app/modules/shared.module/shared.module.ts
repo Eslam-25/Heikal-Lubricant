@@ -11,6 +11,7 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 import { HttpCleintService } from './services/http.client.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientInterceptor } from './services/http.interceptor';
+import { LogoutIconComponent } from './components/logout-icon/logout-icon.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientInterceptor } from './services/http.interceptor';
     HeaderComponent,
     MenuListComponent,
     SnackBarComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    LogoutIconComponent
   ],
   imports: [
     CommonModule,
