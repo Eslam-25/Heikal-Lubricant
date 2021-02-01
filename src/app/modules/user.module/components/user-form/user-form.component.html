@@ -4,7 +4,7 @@
             إضافة مستخدم جديد
         </span>
         <span [ngClass]="['card-text']" *ngIf="updatedUserId > 0">
-             تعديل مستخدم
+            تعديل مستخدم
         </span>
     </div>
 
@@ -15,8 +15,7 @@
             <div>
                 <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
                     <mat-label [ngClass]="['form-label']"> اسم المستخدم</mat-label>
-                    <input matInput type="text" [ngClass]="['form-control']" name="userName"
-                        formControlName="userName">
+                    <input matInput type="text" [ngClass]="['form-control']" name="userName" formControlName="userName">
                 </mat-form-field>
                 <div *ngIf="!userName.valid && (userName.dirty ||userName.touched)" [ngClass]="['err-msg']">
                     من فضلك ادخل اسم المستخدم *
@@ -28,11 +27,29 @@
                     <mat-label [ngClass]="['form-label']"> الرقم السري</mat-label>
                     <input matInput [type]="typeOfInput" [ngClass]="['form-control']" name="password"
                         formControlName="password">
-                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="showPassword">visibility</mat-icon>
-                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="!showPassword">visibility_off</mat-icon>
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="showPassword">
+                        visibility</mat-icon>
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="!showPassword">
+                        visibility_off</mat-icon>
                 </mat-form-field>
                 <div *ngIf="!password.valid && (password.dirty ||password.touched)" [ngClass]="['err-msg']">
                     من فضلك ادخل الرقم السري *
+                </div>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field" [ngClass]="['form-field']" appearance="outline">
+                    <mat-label [ngClass]="['form-label']"> تأكيد الرقم السري</mat-label>
+                    <input matInput [type]="typeOfInput" [ngClass]="['form-control']" name="confirmPassword"
+                        formControlName="confirmPassword">
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="showPassword">
+                        visibility</mat-icon>
+                    <mat-icon [ngClass]="['icon-password']" matSuffix (click)="togglePassword()" *ngIf="!showPassword">
+                        visibility_off</mat-icon>
+                </mat-form-field>
+                <div *ngIf="!userFormInfo.valid && (userFormInfo.dirty ||userFormInfo.touched)" [ngClass]="['err-msg']">
+                    <div *ngIf="userFormInfo.errors?.noMatch">
+                        ترجى ادخال كلمة سر مطابقة *
+                    </div>
                 </div>
             </div>
 
@@ -59,8 +76,10 @@
                         <mat-option [ngClass]="['form-label-select']" [value]="true">نشط</mat-option>
                         <mat-option [ngClass]="['form-label-select']" [value]="false">غير نشط</mat-option>
                     </mat-select>
-
                 </mat-form-field>
+                <div *ngIf="!isActive.valid && (isActive.dirty ||isActive.touched)" [ngClass]="['err-msg']">
+                    من فضلك اختار حالة المستخدم *
+                </div>
             </div>
 
             <div>

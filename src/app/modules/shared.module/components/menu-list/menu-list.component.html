@@ -1,9 +1,9 @@
-<div *ngIf="currentUser?.role == 'User'">
+<ng-container *ngIf="currentUser?.role == 'User'">
     <a [routerLink]="['../lines/list']" mat-menu-item [ngClass]="['menu-item']">الخطوط</a>
     <a [routerLink]="['../products/list']" mat-menu-item [ngClass]="['menu-item']">المنتجات</a>
-</div>
+</ng-container>
 
-<div *ngIf="currentUser?.role != 'User'">
+<ng-container *ngIf="currentUser?.role != 'User'">
     <a mat-menu-item [matMenuTriggerFor]="clients" [ngClass]="['menu-item']">
         <span class="material-icons" [ngClass]="['menu-arrow-left']">arrow_left</span>
         <span>العملاء</span>
@@ -43,4 +43,4 @@
         <a [routerLink]="['../users/user']" mat-menu-item [ngClass]="['menu-item']">موظف جديد</a>
         <a [routerLink]="['../users/list']" mat-menu-item [ngClass]="['menu-item']">الموظفين </a>
     </mat-menu>
-</div>
+</ng-container>

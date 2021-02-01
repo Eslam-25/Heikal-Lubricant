@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarServie } from 'src/app/modules/shared.module/components/snack-bar/snack-bar.service';
 import { RoleModel } from '../../models/role.model';
 import { UserService } from '../../services/user.service';
+import { matchPassword } from '../../validations/confirm-password.validation';
 
 @Component({
   selector: 'app-user-form',
@@ -17,8 +18,11 @@ export class UserFormComponent implements OnInit {
     creationDate: new FormControl(''),
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
     roleId: new FormControl('', [Validators.required]),
     isActive: new FormControl('', [Validators.required]),
+  }, {
+    validators: matchPassword('password', 'confirmPassword')
   });
 
   showPassword: boolean = false;
@@ -37,16 +41,19 @@ export class UserFormComponent implements OnInit {
     this.prepateUpdatedUser();
   }
 
-  userName() {
+  get userName() {
     return this.userFormInfo.get('userName');
   }
-  password() {
+  get password() {
     return this.userFormInfo.get('password');
   }
-  roleId() {
+  confirmPassword() {
+    return this.userFormInfo.get('confirmPassword');
+  }
+  get roleId() {
     return this.userFormInfo.get('roleId');
   }
-  isActive() {
+  get isActive() {
     return this.userFormInfo.get('isActive');
   }
 
@@ -66,7 +73,7 @@ export class UserFormComponent implements OnInit {
 
       if (this.updatedUserId)
         this.userService.getUser(this.updatedUserId).subscribe(user => {
-          this.userFormInfo.setValue(user);
+          this.userFormInfo.patchValue(user);
         })
     })
   }
@@ -74,7 +81,7 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     this.userFormInfo.markAllAsTouched();
     if (this.userFormInfo.valid && !this.updatedUserId ) {
-      const addedUser = {userName: this.userName().value, password: this.password().value, roleId: this.roleId().value, isActive: this.isActive().value};
+      const addedUser = {userName: this.userName.value, password: this.password.value, roleId: this.roleId.value, isActive: this.isActive.value};
       
       this.userService.addUser(addedUser).subscribe(() => {
         this.snackBarService.showSnackBar("تم اضافة المستخدم بنجاح");
